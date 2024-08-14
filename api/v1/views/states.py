@@ -13,7 +13,7 @@ def state_show(state_id):
     """returns a state object"""
     state = storage.get(State, state_id)
     if state is None:
-        abort(404)
+        return abort(404)
     return jsonify(state.to_dict())
 
 
@@ -22,7 +22,7 @@ def state_update(state_id):
     """updates a state"""
     state = storage.get(State, state_id)
     if state is None:
-        abort(404)
+        return abort(404)
     if request.content_type != 'application/json':
         return abort(404, 'Not a JSON')
     if not request.get_json():
@@ -33,7 +33,7 @@ def state_update(state_id):
         if key not in exempt_keys:
             setattr(state, key, value)
     state.save()
-    return jsonify(state.to_dict())
+    return jsonify(state.to_dict()), 200
 
 
 @app_views.route('/states', strict_slashes=False)
@@ -49,7 +49,7 @@ def state_delete(state_id):
     """deletes a state"""
     state = storage.get(State, state_id)
     if state is None:
-        abort(404)
+        return abort(404)
     storage.delete(state)
     storage.save()
     return jsonify({}), 200
