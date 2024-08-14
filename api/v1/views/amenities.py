@@ -61,7 +61,7 @@ def amenities_update(amenity_id):
     if amenity is None:
         return abort(404)
     if request.content_type != 'application/json':
-        return abort(404, 'Not a JSON')
+        return abort(400, 'Not a JSON')
     if not request.get_json():
         return abort(400, 'Not a JSON')
     kwargs = request.get_json()
@@ -70,4 +70,4 @@ def amenities_update(amenity_id):
         if key not in exempt_keys:
             setattr(amenity, key, value)
     amenity.save()
-    return jsonify(amenity.to_dict())
+    return jsonify(amenity.to_dict()), 200
