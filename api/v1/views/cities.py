@@ -79,4 +79,4 @@ def city_update(city_id):
         if key not in exempt_keys:
             setattr(city, key, value)
     city.save()
-    return jsonify(city.to_dict())
+    return jsonify(city.to_dict()), 200
