@@ -59,7 +59,7 @@ def state_delete(state_id):
 def state_create():
     """creates a new state"""
     if request.content_type != 'application/json':
-        return abort(400, 'Not a JSON')
+        return abort(404, 'Not a JSON')
     if not request.get_json():
         return abort(400, 'Not a JSON')
     kwargs = request.get_json()
