@@ -48,7 +48,7 @@ def city_create(state_id):
     if state is None:
         return abort(404)
     if request.content_type != 'application/json':
-        return abort(404, 'Not a JSON')
+        return abort(400, 'Not a JSON')
     if not request.get_json():
         return abort(400, 'Not a JSON')
     kwargs = request.get_json()
@@ -70,7 +70,7 @@ def city_update(city_id):
     if city is None:
         return abort(404)
     if request.content_type != 'application/json':
-        return abort(404, 'Not a JSON')
+        return abort(400, 'Not a JSON')
     if not request.get_json():
         return abort(400, 'Not a JSON')
     kwargs = request.get_json()
