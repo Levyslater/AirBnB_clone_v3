@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Creates a new flask app
-"""
+"""Creates a new flask app and registers the blue print"""
 from flask import Flask
 from models import storage
 from api.v1.views import app_views
